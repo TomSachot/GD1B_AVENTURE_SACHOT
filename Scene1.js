@@ -52,3 +52,15 @@ class Scene1 extends Phaser.Scene{
         demicoeur_1 = this.add.sprite(1230,50, 'demicoeur').setVisible(false);
         demicoeur_2 = this.add.sprite(1180,50, 'demicoeur').setVisible(false);
         demicoeur_3 = this.add.sprite(1130,50, 'demicoeur').setVisible(false);
+
+        argent = this.add.sprite(930, 50, 'argent').setScale(0.5);
+
+        //collisions
+
+        //changement de scene vers scene 2
+            function changementZone(player, zone){
+                if (player.y >= 690 && player.x >= 620 && player.x <= 660){
+                    //player.body.stop();
+                    this.scene.start("scene2");
+                }
+            }
