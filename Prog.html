@@ -1,38 +1,41 @@
-class MyScene extends Phaser.Scene {
+  
+<!doctype html> 
+<html lang="en"> 
+<head> 
+    <meta charset="UTF-8" />
+    <title>Zelda-Like</title>
+    <script src="//cdn.jsdelivr.net/npm/phaser@3.54.0/dist/phaser.js"></script>
+    <script src="Scene1.js"></script>
+    <style type="text/css">
+        body {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
 
-    preload ()
-    {
-        this.load.image('face', 'assets/pics/bw-face.png');
-    }
-
-    create (data)
-    {
-        this.face = this.add.image(data.x, data.y, 'face');
-    }
-
-}
-
-class BootScene extends Phaser.Scene {
-
-    create ()
-    {
-        this.add.text(0, 0, 'Click to add new Scene');
-
-        this.input.once('pointerdown', function () {
-        
-            this.scene.add('myScene', MyScene, true, { x: 400, y: 300 });
-
-        }, this);
-    }
-
-}
+<script type="text/javascript">
 
 var config = {
     type: Phaser.AUTO,
-    parent: 'phaser-example',
+    parent: "game",
     width: 1280,
     height: 720,
-    scene: BootScene
+    input: {
+        gamepad : true
+    },
+    physics: {
+        default: 'arcade',
+        arcade: {
+            debug: false
+        }
+    },
+    scene: [Scene1]
 };
 
 var game = new Phaser.Game(config);
+
+</script>
+
+</body>
+</html>
