@@ -64,3 +64,4 @@ class Scene1 extends Phaser.Scene{
                     this.scene.start("scene2");
                 }
             }
+    }
