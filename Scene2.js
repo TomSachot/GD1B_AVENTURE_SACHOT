@@ -1,6 +1,6 @@
-class SceneTwo extends Phaser.Scene{
+class Scene2 extends Phaser.Scene{
     constructor(){
-        super("sceneTwo");
+        super("scene2");
         this.pad = null;
     }
     init(data){
@@ -14,7 +14,7 @@ class SceneTwo extends Phaser.Scene{
 
     create(){
 
-        //map
+        //Map
 
         //Sprites
         joueur = this.physics.add.sprite(position_x, position_y, 'joueur');
@@ -70,6 +70,8 @@ class SceneTwo extends Phaser.Scene{
                 repeat: -1
             });
 
+        //Aniamtions de l'attaque du joueur
+
         //Clavier
             keys = this.input.keyboard.addKeys({
                 left: Phaser.Input.Keyboard.KeyCodes.LEFT,
@@ -99,6 +101,7 @@ class SceneTwo extends Phaser.Scene{
 
     update(){
         
+        //Perte de vie du joueur
         if (pv_joueur == 2){
             coeur_3.setVisible(false);
             demicoeur_3.setVisible(true);
