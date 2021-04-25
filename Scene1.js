@@ -1,7 +1,7 @@
 var joueur;
 var ennemis;
 var argent;
-var power-up;
+var power_up;
 var murs;
 
 var gamepad;
@@ -194,5 +194,5 @@ class Scene1 extends Phaser.Scene{
 //Attaque
 
 function Attaque(){
-    
+
 }
