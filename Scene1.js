@@ -39,10 +39,10 @@ class Scene1 extends Phaser.Scene{
     }
     create(){
         
-        //map
+        //Map
 
 
-        //sprites
+        //Sprites
         joueur = this.physics.add.sprite(position_x, position_y, 'joueur');
         
         coeur_1 = this.add.sprite(1230,50, 'coeur');
@@ -55,13 +55,144 @@ class Scene1 extends Phaser.Scene{
 
         argent = this.add.sprite(930, 50, 'argent').setScale(0.5);
 
-        //collisions
+        //Collisions
 
-        //changement de scene vers scene 2
-            function changementZone(player, zone){
-                if (player.y >= 690 && player.x >= 620 && player.x <= 660){
-                    //player.body.stop();
+        //Changement de scène
+            function changementZone(joueur, zone){
+                if (joueur.y >= 690 && joueur.x >= 620 && joueur.x <= 660){
+                    //joueur.body.stop();
                     this.scene.start("scene2");
                 }
             }
+
+        //Animations du joueur
+            this.anims.create({
+                key: 'right',
+                frames: this.anims.generateFrameNumbers('joueur', { start: 1, end: 1 }),
+                frameRate: 10,
+                repeat: -1
+                });
+            this.anims.create({
+                key: 'left',
+                frames: this.anims.generateFrameNumbers('joueur', { start: 2, end: 2 }),
+                frameRate: 10,
+                repeat: -1
+                });
+            this.anims.create({
+                key: 'up',
+                frames: this.anims.generateFrameNumbers('joueur', { start: 0, end: 0 }),
+                frameRate: 10,
+                repeat: -1
+                });
+            this.anims.create({
+                key: 'down',
+                frames: this.anims.generateFrameNumbers('joueur', { start: 3, end: 3 }),
+                frameRate: 10,
+                repeat: -1
+                });
+
+            //Clavier
+            keys = this.input.keyboard.addKeys({
+                left: Phaser.Input.Keyboard.KeyCodes.LEFT,
+                right: Phaser.Input.Keyboard.KeyCodes.RIGHT,
+                up : Phaser.Input.Keyboard.KeyCodes.UP,
+                down: Phaser.Input.Keyboard.KeyCodes.DOWN,
+                space: Phaser.Input.Keyboard.KeyCodes.SPACE,
+                shift: Phaser.Input.Keyboard.KeyCodes.SHIFT
+            });
+            
+            //Manette
+            if (this.input.gamepad.total === 0){
+                this.input.gamepad.once('connected', function (pad, button, index) {
+                    paddle = pad;
+                    padConnected = true;
+                }); 
+            }
+            else {
+                paddle = this.input.gamepad.pad1;
+            }
     }
+
+    update(){
+            
+        if (moving == true){
+            moving = false;
+        }
+        //Console.log(game.loop.actualFps);    
+        if (joueur_hp == 2){
+            coeur_3.setVisible(false);
+            demicoeur_3.setVisible(true);
+        }
+        else if (joueur_hp == 1){
+            coeur_3.setVisible(false);
+            demicoeur_3.setVisible(true);
+            coeur_2.setVisible(false);
+            demicoeur_2.setVisible(true);
+        }
+        else if (joueur_hp == 0){
+            coeur_3.setVisible(false);
+            demicoeur_3.setVisible(true);
+            coeur_2.setVisible(false);
+            demicoeur_2.setVisible(true);
+            coeur_1.setVisible(false);
+            demicoeur_1.setVisible(true);
+        }
+        
+        //Contrôles du clavier
+        if (!padConnected){
+            if (keys.right.isDown){
+                joueur.setVelocityX(100);
+                joueur.anims.play('right', true);
+            }
+            else if (keys.left.isDown){
+                joueur.setVelocityX(-100);
+                joueur.anims.play('left', true);
+            }
+            else if (keys.right.isUp && keys.left.isUp){
+                joueur.setVelocityX(0);
+            }
+            if (keys.up.isDown){
+                joueur.setVelocityY(-100);
+                joueur.anims.play('up', true);
+            }
+            else if (keys.down.isDown){
+                joueur.setVelocityY(100);
+                joueur.anims.play('down', true);
+            }
+            else if (keys.up.isUp && keys.down.isUp){
+                joueur.setVelocityY(0);
+            }
+        }
+                
+        //controles manette
+        if (padConnected){
+
+            if(paddle.right || keys.right.isDown){
+                joueur.setVelocityX(100);
+                joueur.anims.play('right', true);
+            }
+            else if(paddle.left || keys.left.isDown){
+                joueur.setVelocityX(-100);
+                joueur.anims.play('left', true);
+            }
+            else if(!paddle.right && !paddle.left || keys.right.isUp && keys.left.isUp){
+                joueur.setVelocityX(0);
+            }
+            if(paddle.up || keys.up.isDown){
+                joueur.setVelocityY(-100);
+                joueur.anims.play('up', true);
+            }
+            else if(paddle.down || keys.down.isDown){
+                joueur.setVelocityY(100);
+                joueur.anims.play('down', true);
+            }
+            else if(!paddle.up && !paddle.down || keys.up.isUp && keys.down.isUp){
+                joueur.setVelocityY(0);
+            }
+        }
+
+//Attaque
+
+function Attaque(){
+    
+}
