@@ -36,6 +36,14 @@ class SceneTwo extends Phaser.Scene{
         this.physics.add.overlap(joueur, argent, collecteArgent, null, this);
         this.physics.add.overlap(joueur, power_up, collectePowerUp, null, this);
 
+        //Changement de scène
+        function changementZone(joueur, zone){
+            if (joueur.y >= 50 && joueur.x >= 50 && joueur.x <= 100){
+                //joueur.body.stop();
+                this.scene.start("scene3");
+            }
+        }
+
         //Animations du joueur
             this.anims.create({
                 key: 'right',
