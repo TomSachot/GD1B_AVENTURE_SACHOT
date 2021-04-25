@@ -9,7 +9,7 @@ var paddle;
 var padConnected;
 var pad;
 
-var pv_joueur = 2;
+var pv_joueur = 3;
 
 var coeur_1;
 var coeur_2;
@@ -56,6 +56,8 @@ class Scene1 extends Phaser.Scene{
         argent = this.add.sprite(930, 50, 'argent').setScale(0.5);
 
         //Collisions
+
+        this.physics.add.overlap(joueur, argent, collecteArgent, null, this);
 
         //Changement de scène
             function changementZone(joueur, zone){
@@ -118,18 +120,18 @@ class Scene1 extends Phaser.Scene{
         if (moving == true){
             moving = false;
         }
-        //Console.log(game.loop.actualFps);    
-        if (joueur_hp == 2){
+    
+        if (pv_joueur == 2){
             coeur_3.setVisible(false);
             demicoeur_3.setVisible(true);
         }
-        else if (joueur_hp == 1){
+        else if (pv_joueur == 1){
             coeur_3.setVisible(false);
             demicoeur_3.setVisible(true);
             coeur_2.setVisible(false);
             demicoeur_2.setVisible(true);
         }
-        else if (joueur_hp == 0){
+        else if (pv_joueur == 0){
             coeur_3.setVisible(false);
             demicoeur_3.setVisible(true);
             coeur_2.setVisible(false);
@@ -138,7 +140,7 @@ class Scene1 extends Phaser.Scene{
             demicoeur_1.setVisible(true);
         }
         
-        //Contrôles du clavier
+        //Contrôles au clavier
         if (!padConnected){
             if (keys.right.isDown){
                 joueur.setVelocityX(100);
@@ -164,7 +166,7 @@ class Scene1 extends Phaser.Scene{
             }
         }
                 
-        //controles manette
+        //Contrôles à la manette
         if (padConnected){
 
             if(paddle.right || keys.right.isDown){
