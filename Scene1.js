@@ -1,5 +1,6 @@
 var joueur;
 var ennemis;
+var boss;
 var argent;
 var power_up;
 var murs;
@@ -93,26 +94,30 @@ class Scene1 extends Phaser.Scene{
                 repeat: -1
                 });
 
-            //Clavier
-            keys = this.input.keyboard.addKeys({
-                left: Phaser.Input.Keyboard.KeyCodes.LEFT,
-                right: Phaser.Input.Keyboard.KeyCodes.RIGHT,
-                up : Phaser.Input.Keyboard.KeyCodes.UP,
-                down: Phaser.Input.Keyboard.KeyCodes.DOWN,
-                space: Phaser.Input.Keyboard.KeyCodes.SPACE,
-                shift: Phaser.Input.Keyboard.KeyCodes.SHIFT
-            });
+        //Animations de l'attaque du joueur
+
+
+
+        //Clavier
+        keys = this.input.keyboard.addKeys({
+            left: Phaser.Input.Keyboard.KeyCodes.LEFT,
+            right: Phaser.Input.Keyboard.KeyCodes.RIGHT,
+            up : Phaser.Input.Keyboard.KeyCodes.UP,
+            down: Phaser.Input.Keyboard.KeyCodes.DOWN,
+            space: Phaser.Input.Keyboard.KeyCodes.SPACE,
+            shift: Phaser.Input.Keyboard.KeyCodes.SHIFT
+        });
             
-            //Manette
-            if (this.input.gamepad.total === 0){
-                this.input.gamepad.once('connected', function (pad, button, index) {
-                    paddle = pad;
-                    padConnected = true;
-                }); 
-            }
-            else {
-                paddle = this.input.gamepad.pad1;
-            }
+        //Manette
+        if (this.input.gamepad.total === 0){
+            this.input.gamepad.once('connected', function (pad, button, index) {
+                paddle = pad;
+                padConnected = true;
+            }); 
+        }
+        else {
+            paddle = this.input.gamepad.pad1;
+        }
     }
 
     update(){
@@ -120,7 +125,7 @@ class Scene1 extends Phaser.Scene{
         if (moving == true){
             moving = false;
         }
-    
+        //Perte de vie du joueur
         if (pv_joueur == 2){
             coeur_3.setVisible(false);
             demicoeur_3.setVisible(true);
