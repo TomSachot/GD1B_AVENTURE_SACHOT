@@ -30,7 +30,7 @@ class Scene1 extends Phaser.Scene{
     init(data){
     }
     preload(){   
-        this.load.image('tiles', 'assets/tileset_placeholder.jpg');
+        this.load.image('tiles', 'assets/.jpg');
         this.load.spritesheet('joueur', 'assets/joueur.png', {frameWidth: 32, frameHeight: 32});
         this.load.image('argent', 'assets/argent.png'); 
         this.load.image('ennemi1', 'assets/ennemi1.png');
